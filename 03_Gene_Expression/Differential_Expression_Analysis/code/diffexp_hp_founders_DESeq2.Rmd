@@ -1,6 +1,8 @@
 ---
 title: "Differential Gene Expression Analysis in the CC/DO founders Hippocampus"
 source: Rmd
+author: "Violet M. Kimble"
+date: "2/23/2022"
 output:
   word_document: default
   html_document:
@@ -43,10 +45,13 @@ The experimental design contains enough replicates per strain per sex to allow u
 By now you would have all ready installed the required R packages necessary for the successful completion of this module. If you have **NOT**, please do so now by following the instructions below by pasting them in the R console:
 
 ```{r pkgs, eval=FALSE, warning=FALSE, message=FALSE}
-source("https://bioconductor.org/biocLite.R")
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install(version = "3.14")
+
 #libraries for gene expression analysis
-biocLite("DESeq2")
-biocLite("vsn")
+BiocManager::install("DESeq2")
+BiocManager::install("vsn")
 
 #libraries for table manipulations
 install.packages("DT")
@@ -58,8 +63,8 @@ install.packages("pheatmap")
 install.packages("RColorBrewer")
 
 #libraries for gene annotation and enrichement analysis
-biocLite("org.Mm.eg.db")
-biocLite("topGO")
+BiocManager::install("org.Mm.eg.db")
+BiocManager::install("topGO")
 
 ```
 
@@ -73,11 +78,11 @@ You have already been introduced to the various steps in this workflow. For this
 
 ### Read in a counts table and create a DESeq2 object
 ```{r read_counts_matrix, warning=FALSE, message=FALSE}
-countData <- read.table("../data/hp_founder_gex_counts.txt", header = TRUE, check.names = FALSE)
+countData <- read.table("/Users/violetkimble/B/ShortCourse_2019/03_Gene_Expression/Differential_Expression_Analysis/data/hp_founder_gex_counts.txt", header = TRUE, check.names = FALSE)
 row.names(countData) <- countData$locus
 countData <- countData[,-1]
 countData <- round(countData)
-sampleSheet <- read.table("../data/SampleSheet_Chesler_Founders_Hippocampus_RNASeq.txt", header = TRUE)
+sampleSheet <- read.table("/Users/violetkimble/B/ShortCourse_2019/03_Gene_Expression/Differential_Expression_Analysis/data/SampleSheet_Chesler_Founders_Hippocampus_RNASeq.txt", header = TRUE)
 strains <- sampleSheet$strain
 sex <- sampleSheet$sex
 
