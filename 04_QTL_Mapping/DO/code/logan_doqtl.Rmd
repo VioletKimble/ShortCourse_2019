@@ -300,7 +300,7 @@ We can call [scan1snps](https://github.com/rqtl/qtl2/blob/master/R/scan1snps.R) 
 chr = 6
 start = 95
 end = 99
-query_func = create_variant_query_func("../data/cc_variants.sqlite")
+query_func = create_variant_query_func("/Users/violetkimble/Downloads/cc_variants.sqlite")
 assoc = scan1snps(genoprobs = aprobs[,chr], map = do.cross$pmap, pheno = pheno[,index,drop = FALSE], kinship = kinship, addcovar = addcovar, query_func = query_func, chr = chr, start = start, end = end, keep_all_snps = TRUE)
 ```
 
@@ -318,7 +318,7 @@ We can add a plot containing the genes in the QTL interval using the `plot_genes
 First, we must query the database for the genes in the interval. The path of the first argument points to the data directory on your computer.
 
 ```{r get_genes}
-query_genes = create_gene_query_func(dbfile = "../data/mouse_genes.sqlite", filter = "source='MGI'")
+query_genes = create_gene_query_func(dbfile = "/Users/violetkimble/Downloads/mouse_genes.sqlite", filter = "source='MGI'")
 genes = query_genes(chr, start, end)
 head(genes)
 ```
